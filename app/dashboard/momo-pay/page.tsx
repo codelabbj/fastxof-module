@@ -209,9 +209,9 @@ export default function MomoPayPage() {
     }
   }
 
-  const totalAmount = transactions.reduce((sum, t) => sum + t.amount_as_integer, 0)
-  const confirmedAmount = transactions.filter(t => t.status === 'confirmed').reduce((sum, t) => sum + t.amount_as_integer, 0)
-  const pendingAmount = transactions.filter(t => t.status === 'pending').reduce((sum, t) => sum + t.amount_as_integer, 0)
+  const totalAmount = transactions.reduce((sum, t) => sum + parseFloat(t.amount || '0'), 0)
+  const confirmedAmount = transactions.filter(t => t.status === 'confirmed').reduce((sum, t) => sum + parseFloat(t.amount || '0'), 0)
+  const pendingAmount = transactions.filter(t => t.status === 'pending').reduce((sum, t) => sum + parseFloat(t.amount || '0'), 0)
 
   return (
     <div className="space-y-8">
@@ -236,7 +236,7 @@ export default function MomoPayPage() {
           <div className="flex items-center gap-2 px-3 py-2 bg-green-50 dark:bg-green-950/20 rounded-lg">
             <CheckCircle className="h-4 w-4 text-green-500" />
             <span className="text-sm font-medium text-green-600 dark:text-green-400">
-              {(confirmedAmount / 100).toLocaleString()} XOF confirmées
+              {confirmedAmount.toLocaleString()} XOF confirmées
             </span>
           </div>
           <Button variant="outline" size="sm">
@@ -257,7 +257,7 @@ export default function MomoPayPage() {
           <div className="flex items-center justify-between">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">Total des transactions</p>
-                <p className="text-2xl font-bold text-foreground">{(totalAmount / 100).toLocaleString()} XOF</p>
+                <p className="text-2xl font-bold text-foreground">{totalAmount.toLocaleString()} XOF</p>
                 <div className="flex items-center gap-1">
                   <TrendingUp className="h-3 w-3 text-green-500" />
                   <span className="text-xs text-green-500">+15% ce mois</span>
@@ -275,7 +275,7 @@ export default function MomoPayPage() {
             <div className="flex items-center justify-between">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">Confirmées</p>
-                <p className="text-2xl font-bold text-foreground">{(confirmedAmount / 100).toLocaleString()} XOF</p>
+                <p className="text-2xl font-bold text-foreground">{confirmedAmount.toLocaleString()} XOF</p>
                 <div className="flex items-center gap-1">
                   <CheckCircle className="h-3 w-3 text-green-500" />
                   <span className="text-xs text-green-500">
@@ -295,7 +295,7 @@ export default function MomoPayPage() {
             <div className="flex items-center justify-between">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">En attente</p>
-                <p className="text-2xl font-bold text-foreground">{(pendingAmount / 100).toLocaleString()} XOF</p>
+                <p className="text-2xl font-bold text-foreground">{pendingAmount.toLocaleString()} XOF</p>
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3 text-yellow-500" />
                   <span className="text-xs text-yellow-500">
@@ -432,7 +432,7 @@ export default function MomoPayPage() {
                         </TableCell>
                         <TableCell>
                         <div className="text-lg font-semibold text-foreground">
-                          {(transaction.amount_as_integer / 100).toLocaleString()} XOF
+                          {parseFloat(transaction.amount || '0').toLocaleString()} XOF
                           </div>
                         </TableCell>
                         <TableCell>
@@ -579,7 +579,7 @@ export default function MomoPayPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-muted-foreground">Montant</label>
-                  <span className="text-lg font-semibold">{(detailTransaction.amount_as_integer / 100).toLocaleString()} XOF</span>
+                  <span className="text-lg font-semibold">{parseFloat(detailTransaction.amount || '0').toLocaleString()} XOF</span>
                     </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-muted-foreground">Téléphone</label>
