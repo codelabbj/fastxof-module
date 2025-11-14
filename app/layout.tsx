@@ -9,8 +9,8 @@ import { WebSocketProviderWrapper } from "@/components/providers/websocket-provi
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Zefast Module - Admin Dashboard",
-  description: "Professional admin dashboard for Zefast Module",
+  title: "FastXof Module - Admin Dashboard",
+  description: "Professional admin dashboard for FastXof Module",
     // generator: 'v0.dev'
 }
 
